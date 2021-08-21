@@ -5,9 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:gallery_case_2021"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-		<Button x:Name="MainButton" Click="MainClick" Content="Button" HorizontalAlignment="Left" Margin="109,141,0,0" VerticalAlignment="Top" Width="75"/>
-
+        Title="Gallery Demo App" Height="720" Width="1280">
+	<Grid>
+		<Label Content="Данные рекламы:" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="20" Width="724"/>
+		<DataGrid x:Name="playerLogDataGrid" HorizontalAlignment="Stretch" Height="196" VerticalAlignment="Top" FontSize="12" Margin="0,64,450,0">
+		</DataGrid>
+		<Label Content="Данные контактов:" HorizontalAlignment="Right" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="20" Width="432"/>
+		<DataGrid x:Name="crowdDataGrid" HorizontalAlignment="Right" Height="196" VerticalAlignment="Top" FontSize="12" Margin="0,64,0,0" Width="432"/>
+		<Label Content="Прогнозируемый период: с                         по" HorizontalAlignment="Left" Margin="0,285,0,0" VerticalAlignment="Top" FontSize="20" Width="578"/>
+		<Button x:Name="MainButton" Click="MainClick" Content="Рассчитать" FontSize="16" HorizontalAlignment="Left" Margin="578,290,0,0" VerticalAlignment="Top" Width="179" Height="30"/>
+		<Label Content="Всего контактов:" HorizontalAlignment="Left" Margin="0,352,0,0" VerticalAlignment="Top" FontSize="20" Width="167"/>
+		<Label x:Name="labelContacts" Content="" HorizontalAlignment="Left" Margin="167,352,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
+		<Label Content="Временной интервал:" HorizontalAlignment="Left" Margin="0,388,0,0" VerticalAlignment="Top" FontSize="20" Width="209"/>
+		<Label x:Name="labelInterval" Content="" HorizontalAlignment="Left" Margin="209,388,0,0" VerticalAlignment="Top" FontSize="20" Width="195"/>
+		<Label Content="Ранжирование по активности:" HorizontalAlignment="Left" Margin="0,507,0,0" VerticalAlignment="Top" FontSize="20" Width="456"/>
+		<Label Content="Коэффициент трафика:" HorizontalAlignment="Left" Margin="674,352,0,0" VerticalAlignment="Top" FontSize="20" Width="354"/>
+		<TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Margin="267,293,0,0" TextWrapping="Wrap" Text="01.10.2021" VerticalAlignment="Top" Width="120" FontSize="16" IsReadOnly="True"/>
+		<TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Margin="425,293,0,0" TextWrapping="Wrap" Text="30.10.2021" VerticalAlignment="Top" Width="120" FontSize="16" IsReadOnly="True"/>
+		<Label Content="Среднесуточный OTS:" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top" FontSize="20" Width="209"/>
+		<Label x:Name="labelAverageOTS" Content="" HorizontalAlignment="Left" Margin="209,425,0,0" VerticalAlignment="Top" FontSize="20" Width="195"/>
+		<ListBox x:Name="listBoxPerDayOTS" HorizontalAlignment="Left" Height="159" Margin="306,507,0,0" VerticalAlignment="Top" Width="185"/>
 	</Grid>
 </Window>

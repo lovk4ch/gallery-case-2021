@@ -4,21 +4,28 @@ namespace gallery_case_2021
 {
     public class PlayerLog
     {
-        public ulong oidColumn;
-        public DateTime billingDate;
-        public string mediaItemName;
-        public int duration;
-        public long dateTimeInTick;
-        public long dateTimeOutTick;
+        private ulong oidColumn;
+        private DateTimeOffset billingDate;
+        private string mediaItemName;
+        private int duration;
+        private long dateTimeInTick;
+        private long dateTimeOutTick;
 
-        public PlayerLog(ulong oidColumn, string mediaItemName, int duration, long dateTimeInTick, long dateTimeOutTick)
+        public ulong OidColumn { get => oidColumn; set => oidColumn = value; }
+        public DateTimeOffset BillingDate { get => billingDate; set => billingDate = value; }
+        public string MediaItemName { get => mediaItemName; set => mediaItemName = value; }
+        public int Duration { get => duration; set => duration = value; }
+        public long DateTimeInTick { get => dateTimeInTick; set => dateTimeInTick = value; }
+        public long DateTimeOutTick { get => dateTimeOutTick; set => dateTimeOutTick = value; }
+
+        public PlayerLog(ulong oidColumn, DateTimeOffset billingDate, string mediaItemName, int duration, long dateTimeInTick, long dateTimeOutTick)
         {
-            this.oidColumn = oidColumn;
-            this.billingDate = DateTime.FromFileTimeUtc(dateTimeInTick);
-            this.mediaItemName = mediaItemName;
-            this.duration = duration;
-            this.dateTimeInTick = dateTimeInTick;
-            this.dateTimeOutTick = dateTimeOutTick;
+            this.OidColumn = oidColumn;
+            this.BillingDate = billingDate;
+            this.MediaItemName = mediaItemName;
+            this.Duration = duration;
+            this.DateTimeInTick = dateTimeInTick;
+            this.DateTimeOutTick = dateTimeOutTick;
         }
     }
 }

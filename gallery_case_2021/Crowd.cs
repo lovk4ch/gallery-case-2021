@@ -2,17 +2,22 @@
 {
     public class Crowd
     {
-        public ulong oidColumn;
-        public string mac;
-        public long? addedOnTick;
-        public ulong oidFrame;
+        private ulong oidColumn;
+        private string mac;
+        private long? addedOnTick;
+        private ulong oidFrame;
 
-        public Crowd(ulong oidColumn, string mac, long? addedOnTick, ulong oidFrame)
+        public ulong OidColumn { get => oidColumn; set => oidColumn = value; }
+        public string Mac { get => mac; set => mac = value; }
+        public long? AddedOnTick { get => addedOnTick; set => addedOnTick = value; }
+        public ulong OidFrame { get => oidFrame; set => oidFrame = value; }
+
+        public Crowd(ulong oidColumn = 1, string mac = "1C:11", long? addedOnTick = 1, ulong oidFrame = 1)
         {
-            this.oidColumn = oidColumn;
-            this.mac = mac;
-            this.addedOnTick = addedOnTick;
-            this.oidFrame = oidFrame;
+            this.OidColumn = oidColumn;
+            this.Mac = mac;
+            this.AddedOnTick = addedOnTick;
+            this.OidFrame = oidFrame;
         }
     }
 }
