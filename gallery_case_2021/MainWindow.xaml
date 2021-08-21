@@ -3,27 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:gallery_case_2021"
         mc:Ignorable="d"
         Title="Gallery Demo App" Height="720" Width="1280">
-	<Grid>
-		<Label Content="Данные рекламы:" HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="20" Width="724"/>
-		<DataGrid x:Name="playerLogDataGrid" HorizontalAlignment="Stretch" Height="196" VerticalAlignment="Top" FontSize="12" Margin="0,64,450,0">
-		</DataGrid>
-		<Label Content="Данные контактов:" HorizontalAlignment="Right" Margin="0,27,0,0" VerticalAlignment="Top" FontSize="20" Width="432"/>
-		<DataGrid x:Name="crowdDataGrid" HorizontalAlignment="Right" Height="196" VerticalAlignment="Top" FontSize="12" Margin="0,64,0,0" Width="432"/>
-		<Label Content="Прогнозируемый период: с                         по" HorizontalAlignment="Left" Margin="0,285,0,0" VerticalAlignment="Top" FontSize="20" Width="578"/>
-		<Button x:Name="MainButton" Click="MainClick" Content="Рассчитать" FontSize="16" HorizontalAlignment="Left" Margin="578,290,0,0" VerticalAlignment="Top" Width="179" Height="30"/>
-		<Label Content="Всего контактов:" HorizontalAlignment="Left" Margin="0,352,0,0" VerticalAlignment="Top" FontSize="20" Width="167"/>
-		<Label x:Name="labelContacts" Content="" HorizontalAlignment="Left" Margin="167,352,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
-		<Label Content="Временной интервал:" HorizontalAlignment="Left" Margin="0,388,0,0" VerticalAlignment="Top" FontSize="20" Width="209"/>
-		<Label x:Name="labelInterval" Content="" HorizontalAlignment="Left" Margin="209,388,0,0" VerticalAlignment="Top" FontSize="20" Width="195"/>
-		<Label Content="Ранжирование по активности:" HorizontalAlignment="Left" Margin="0,507,0,0" VerticalAlignment="Top" FontSize="20" Width="456"/>
-		<Label Content="Коэффициент трафика:" HorizontalAlignment="Left" Margin="674,352,0,0" VerticalAlignment="Top" FontSize="20" Width="354"/>
-		<TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Margin="267,293,0,0" TextWrapping="Wrap" Text="01.10.2021" VerticalAlignment="Top" Width="120" FontSize="16" IsReadOnly="True"/>
-		<TextBox HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="24" Margin="425,293,0,0" TextWrapping="Wrap" Text="30.10.2021" VerticalAlignment="Top" Width="120" FontSize="16" IsReadOnly="True"/>
-		<Label Content="Среднесуточный OTS:" HorizontalAlignment="Left" Margin="0,425,0,0" VerticalAlignment="Top" FontSize="20" Width="209"/>
-		<Label x:Name="labelAverageOTS" Content="" HorizontalAlignment="Left" Margin="209,425,0,0" VerticalAlignment="Top" FontSize="20" Width="195"/>
-		<ListBox x:Name="listBoxPerDayOTS" HorizontalAlignment="Left" Height="159" Margin="306,507,0,0" VerticalAlignment="Top" Width="185"/>
-	</Grid>
+    <Grid>
+        <Label Content="Прогнозируемый период:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
+        <Button x:Name="MainButton" Click="MainClick" Content="Рассчитать" FontSize="16" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="243" Height="30"/>
+        <Label Content="Рекомендованное число" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
+        <Label Content="показов:" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" FontSize="20" Width="92"/>
+        <Label x:Name="viewsPerHourLabel" Content="" HorizontalAlignment="Left" Margin="107,259,0,0" VerticalAlignment="Top" FontSize="20" Width="146"/>
+        <Label Content="Активные билборды:" HorizontalAlignment="Left" Margin="288,19,0,0" VerticalAlignment="Top" FontSize="20" Width="212"/>
+        <TabControl x:Name="playersTab" HorizontalAlignment="Stretch" Height="507" Margin="288,61,5,0" VerticalAlignment="Top" FontSize="20">
+            <TabItem x:Name="player1" Header="258">
+                <local:PlayerDataWindow PlayerId="258" x:Name="player1_data"/>
+            </TabItem>
+            <TabItem x:Name="player2" Header="271">
+                <local:PlayerDataWindow PlayerId="271" x:Name="player2_data"/>
+            </TabItem>
+        </TabControl>
+        <Label Content="с:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" FontSize="20" Width="30"/>
+        <DatePicker HorizontalAlignment="Left" FontSize="20" Margin="52,61,0,0" VerticalAlignment="Top" Width="201" IsDropDownOpen="True" FirstDayOfWeek="Monday" DisplayDate="2021-08-22"/>
+        <Label Content="по:" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" FontSize="20" Width="44"/>
+        <DatePicker HorizontalAlignment="Left" FontSize="20" Margin="52,101,0,0" VerticalAlignment="Top" Width="201" IsDropDownOpen="True" FirstDayOfWeek="Monday"/>
+    </Grid>
 </Window>
