@@ -11,10 +11,11 @@ namespace gallery_case_2021
 {
     public partial class MainWindow : Window
     {
+        private const string pathPrefix = "..//..//data/";
         public Crowd[] ReadParquetCrowdFile()
         {
             // open file stream
-            using (Stream fileStream = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "crowd/month=2020-11.parquet"))
+            using (Stream fileStream = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + pathPrefix + "crowd/month=2020-11.parquet"))
             {
                 // open parquet file reader
                 using (var parquetReader = new ParquetReader(fileStream))
@@ -62,7 +63,7 @@ namespace gallery_case_2021
         public PlayerLog[] ReadParquetPlayerLogFile()
         {
             // open file stream
-            using (Stream fileStream = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "player_log/month=2020-11.parquet"))
+            using (Stream fileStream = File.OpenRead(AppDomain.CurrentDomain.BaseDirectory + pathPrefix + "player_log/month=2020-11.parquet"))
             {
                 // open parquet file reader
                 using (var parquetReader = new ParquetReader(fileStream))
@@ -152,11 +153,11 @@ namespace gallery_case_2021
 
             List<int> dayContacts = new List<int>();
             string dayContactsData = string.Empty;
-            for (int i = 0; i < daysInterval - 1; i++)
+            for (int i = 0; i < daysInterval; i++)
             {
                 int currentDayOTS = results.Where(
-                    x => x.BillingDate.Ticks > daysMin.AddDays(i).Ticks
-                    && x.BillingDate.Ticks < daysMin.AddDays(i + 2).Ticks
+                    x => x.BillingDate.Ticks > daysMin.AddDays(i - 1).Ticks
+                    && x.BillingDate.Ticks < daysMin.AddDays(i + 1).Ticks
                 ).ToList().Count;
                 dayContacts.Add(currentDayOTS);
                 listBoxPerDayOTS.Items.Add(i + 1 + ".10.2021: " + currentDayOTS);
