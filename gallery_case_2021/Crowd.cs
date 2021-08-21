@@ -1,10 +1,18 @@
 ﻿namespace gallery_case_2021
 {
-    class Crowd
+    public class Crowd
     {
-        public ulong OidColumn;
-        public string Mac;
-        public ulong OidFrame;
-        public ulong AddedOnTick;
+        public ulong oidColumn;
+        public string mac;
+        public long? addedOnTick;
+        public ulong oidFrame;
+
+        public Crowd(ulong oidColumn, string mac, long? addedOnTick, ulong oidFrame)
+        {
+            this.oidColumn = oidColumn;
+            this.mac = mac;
+            this.addedOnTick = addedOnTick;
+            this.oidFrame = oidFrame;
+        }
     }
 }

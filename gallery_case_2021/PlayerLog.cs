@@ -1,11 +1,24 @@
-﻿namespace gallery_case_2021
+﻿using System;
+
+namespace gallery_case_2021
 {
-    class PlayerLog
+    public class PlayerLog
     {
-        public ulong OidColumn;
-        public string MediaItemName;
-        public int Duration;
-        public ulong DateTimeInTick;
-        public ulong DateTimeOutTick;
+        public ulong oidColumn;
+        public DateTime billingDate;
+        public string mediaItemName;
+        public int duration;
+        public long dateTimeInTick;
+        public long dateTimeOutTick;
+
+        public PlayerLog(ulong oidColumn, string mediaItemName, int duration, long dateTimeInTick, long dateTimeOutTick)
+        {
+            this.oidColumn = oidColumn;
+            this.billingDate = DateTime.FromFileTimeUtc(dateTimeInTick);
+            this.mediaItemName = mediaItemName;
+            this.duration = duration;
+            this.dateTimeInTick = dateTimeInTick;
+            this.dateTimeOutTick = dateTimeOutTick;
+        }
     }
 }
