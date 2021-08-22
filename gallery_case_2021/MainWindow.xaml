@@ -6,10 +6,10 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:gallery_case_2021"
         mc:Ignorable="d"
-        Title="Gallery Demo App" Height="720" Width="1280">
+        Title="Gallery Demo App" Height="720" Width="1280" Style="{StaticResource WindowStyle}">
     <Grid>
         <Label Content="Прогнозируемый период:" HorizontalAlignment="Left" Margin="10,19,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
-        <Button x:Name="CkeckButton" Content="Рассчитать" Click="CheckClick" FontSize="16" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="243" Height="30"/>
+        <Button x:Name="CkeckButton" Content="Рассчитать" Style="{StaticResource ButtonStyle}" Click="CheckClick" FontSize="16" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" Width="254" Height="30" BorderBrush="#FF464646"/>
         <Label Content="Коэффициент простоя:" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
         <Label x:Name="idleCoefficient" Content="" HorizontalAlignment="Left" Margin="10,251,0,0" VerticalAlignment="Top" FontSize="20" Width="254" FontWeight="Bold"/>
         <Label Content="Рекомендованное число" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
@@ -17,9 +17,9 @@
         <Label x:Name="viewsPerHourLabel" Content="" HorizontalAlignment="Left" Margin="138,341,0,0" VerticalAlignment="Top" FontSize="20" Width="115" FontWeight="Bold"/>
         <Label Content="Активные билборды:" HorizontalAlignment="Left" Margin="288,19,0,0" VerticalAlignment="Top" FontSize="20" Width="212"/>
         <Label Content="с:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" FontSize="20" Width="30"/>
-        <DatePicker x:Name="dateTimeStart" HorizontalAlignment="Left" FontSize="20" Margin="52,61,0,0" VerticalAlignment="Top" Width="201" FirstDayOfWeek="Monday" DisplayDate="2021-08-22" SelectedDateFormat="Long" DisplayDateEnd="2022-09-01" DisplayDateStart="2021-07-01" SelectedDateChanged="StartDateChanged"/>
+        <DatePicker x:Name="dateTimeStart" HorizontalAlignment="Left" FontSize="20" Margin="52,61,0,0" VerticalAlignment="Top" Width="212" FirstDayOfWeek="Monday" DisplayDate="2021-08-22" SelectedDateFormat="Long" DisplayDateEnd="2022-09-01" DisplayDateStart="2021-07-01" SelectedDateChanged="StartDateChanged"/>
         <Label Content="по:" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" FontSize="20" Width="44"/>
-        <DatePicker x:Name="dateTimeEnd" HorizontalAlignment="Left" FontSize="20" Margin="52,101,0,0" VerticalAlignment="Top" Width="201" FirstDayOfWeek="Monday" SelectedDateFormat="Long" DisplayDateStart="2021-07-01" DisplayDateEnd="2022-09-01"/>
+        <DatePicker x:Name="dateTimeEnd" HorizontalAlignment="Left" FontSize="20" Margin="52,101,0,0" VerticalAlignment="Top" Width="212" FirstDayOfWeek="Monday" SelectedDateFormat="Long" DisplayDateStart="2021-07-01" DisplayDateEnd="2022-09-01"/>
         <Label Content="--Настройка параметров--" HorizontalAlignment="Left" Margin="10,420,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
         <Label Content="Показы:" HorizontalAlignment="Left" Margin="10,457,0,0" VerticalAlignment="Top" FontSize="20" Width="82"/>
         <Slider IsEnabled="False" x:Name="userViewsSlider" Minimum="1" Maximum="72" HorizontalAlignment="Left" Margin="10,500,0,0" VerticalAlignment="Top" Height="26" Width="254" ValueChanged="SliderValueChanged"/>
@@ -27,8 +27,8 @@
         <Label Content="Выбрать билборды:" HorizontalAlignment="Left" Margin="10,531,0,0" VerticalAlignment="Top" FontSize="20" Width="254"/>
         <CheckBox Content="258" HorizontalAlignment="Left" Margin="10,573,0,0" VerticalAlignment="Top" FontSize="20" Height="35" Width="64"/>
         <CheckBox Content="271" HorizontalAlignment="Left" Margin="79,573,0,0" VerticalAlignment="Top" FontSize="20" Height="35" Width="64"/>
-        <Button x:Name="MainButton" Content="Запланировать кампанию" IsEnabled="False" Click="MainClick" FontSize="16" HorizontalAlignment="Left" Margin="10,641,0,0" VerticalAlignment="Top" Width="243" Height="30"/>
-        <TabControl x:Name="playersTab" HorizontalAlignment="Stretch" Margin="288,61,5,10" VerticalAlignment="Stretch" FontSize="20">
+        <Button x:Name="MainButton" Content="Запланировать кампанию" Style="{StaticResource ButtonStyle}" IsEnabled="False" Click="MainClick" FontSize="16" HorizontalAlignment="Left" Margin="10,641,0,0" VerticalAlignment="Top" Width="254" Height="30"/>
+        <TabControl x:Name="playersTab" HorizontalAlignment="Stretch" Style="{StaticResource TabStyle}" Margin="288,61,5,10" VerticalAlignment="Stretch" FontSize="20">
             <TabItem x:Name="player1" Header="258">
                 <local:PlayerDataWindow PlayerId="258" x:Name="player1_data"/>
             </TabItem>
