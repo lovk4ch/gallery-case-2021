@@ -23,9 +23,19 @@ namespace gallery_case_2021
             InitializeComponent();
         }
 
-        public void SetData()
+        public void SetData(DateTime? startDate, DateTime? endDate)
         {
-            var playerData = ParquetManager.GetPlayerData(PlayerId, 2021, 1);
+            var playerData = ParquetManager.GetPlayerData(PlayerId, (DateTime)startDate, (DateTime)endDate);
+            if (playerData == null || playerData.Count == 0)
+            {
+                dataNotFoundLabel.Visibility = Visibility.Visible;
+                playerPlot.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            dataNotFoundLabel.Visibility = Visibility.Collapsed;
+            playerPlot.Visibility = Visibility.Visible;
+
             playerDataGrid.Columns.Clear();
             playerDataGrid.ItemsSource = playerData;
 
@@ -50,8 +60,9 @@ namespace gallery_case_2021
             contactsLabel.Content = totalContacts;
             intervalLabel.Content = daysInterval + " дней";
             averageOTSLabel.Content = totalContacts / daysInterval;
+            workloadLabel.Content = "100%";
 
-            playerPlot.SetData(daysMin, daysInterval, 2021, dayContacts);
+            playerPlot.SetData(daysMin, daysInterval, dayContacts);
         }
     }
 }

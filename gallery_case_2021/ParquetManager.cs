@@ -14,104 +14,126 @@ namespace gallery_case_2021
 
         private static PlayerLog[] ReadParquetPlayerLogFile(int playerId, int year, int month)
         {
-            // open file stream
-            using (Stream fileStream = File.OpenRead(string.Format(path, "player_log", playerId, year, month)))
+            try
             {
-                // open parquet file reader
-                using (var parquetReader = new ParquetReader(fileStream))
+                // open file stream
+                using (Stream fileStream = File.OpenRead(string.Format(path, "player_log", playerId, year, month)))
                 {
-                    // get file schema (available straight after opening parquet reader)
-                    // however, get only data fields as only they contain data values
-                    DataField[] dataFields = parquetReader.Schema.GetDataFields();
-
-                    // enumerate through row groups in this file
-                    // for (int i = 0; i < parquetReader.RowGroupCount; i++)
+                    // open parquet file reader
+                    using (var parquetReader = new ParquetReader(fileStream))
                     {
-                        // create row group reader
-                        using (ParquetRowGroupReader groupReader = parquetReader.OpenRowGroupReader(0))
+                        // get file schema (available straight after opening parquet reader)
+                        // however, get only data fields as only they contain data values
+                        DataField[] dataFields = parquetReader.Schema.GetDataFields();
+
+                        // enumerate through row groups in this file
+                        // for (int i = 0; i < parquetReader.RowGroupCount; i++)
                         {
-                            // read all columns inside each row group (you have an option to read only
-                            // required columns if you need to.
-                            PlayerLog[] playerLogs = new PlayerLog[Math.Min(groupReader.RowCount, maxRowsCount)];
-
-                            DataColumn[] columns = dataFields.Select(groupReader.ReadColumn).ToArray();
-
-                            // .Data member contains a typed array of column data you can cast to the type of the column
-                            DataColumn oidColumn = columns[0];
-                            string[] oidColumns = (string[])oidColumn.Data;
-
-                            DataColumn billingDate = columns[2];
-                            DateTimeOffset[] billingDates = (DateTimeOffset[])billingDate.Data;
-
-                            DataColumn mediaItemName = columns[3];
-                            string[] mediaItemNames = (string[])mediaItemName.Data;
-
-                            DataColumn duration = columns[4];
-                            decimal?[] durations = (decimal?[])duration.Data;
-
-                            for (int i = 0; i < playerLogs.Length; i++)
+                            // create row group reader
+                            using (ParquetRowGroupReader groupReader = parquetReader.OpenRowGroupReader(0))
                             {
-                                playerLogs[i] = new PlayerLog(oidColumns[i] != null ? ulong.Parse(oidColumns[i]) : 0, billingDates[i], mediaItemNames[i], (int)durations[i]);
+                                // read all columns inside each row group (you have an option to read only
+                                // required columns if you need to.
+                                PlayerLog[] playerLogs = new PlayerLog[Math.Min(groupReader.RowCount, maxRowsCount)];
+
+                                DataColumn[] columns = dataFields.Select(groupReader.ReadColumn).ToArray();
+
+                                // .Data member contains a typed array of column data you can cast to the type of the column
+                                DataColumn oidColumn = columns[0];
+                                string[] oidColumns = (string[])oidColumn.Data;
+
+                                DataColumn billingDate = columns[2];
+                                DateTimeOffset[] billingDates = (DateTimeOffset[])billingDate.Data;
+
+                                DataColumn mediaItemName = columns[3];
+                                string[] mediaItemNames = (string[])mediaItemName.Data;
+
+                                DataColumn duration = columns[4];
+                                decimal?[] durations = (decimal?[])duration.Data;
+
+                                for (int i = 0; i < playerLogs.Length; i++)
+                                {
+                                    playerLogs[i] = new PlayerLog(oidColumns[i] != null ? ulong.Parse(oidColumns[i]) : 0, billingDates[i], mediaItemNames[i], (int)durations[i]);
+                                }
+                                fileStream.Dispose();
+                                return playerLogs;
                             }
-                            fileStream.Dispose();
-                            return playerLogs;
                         }
                     }
                 }
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
             }
         }
         private static Crowd[] ReadParquetCrowdFile(int playerId, int year, int month)
         {
-            // open file stream
-            using (Stream fileStream = File.OpenRead(string.Format(path, "crowd", playerId, year, month)))
+            try
             {
-                // open parquet file reader
-                using (var parquetReader = new ParquetReader(fileStream))
+                // open file stream
+                using (Stream fileStream = File.OpenRead(string.Format(path, "crowd", playerId, year, month)))
                 {
-                    // get file schema (available straight after opening parquet reader)
-                    // however, get only data fields as only they contain data values
-                    DataField[] dataFields = parquetReader.Schema.GetDataFields();
-
-                    // enumerate through row groups in this file
-                    // for (int i = 0; i < parquetReader.RowGroupCount; i++)
+                    // open parquet file reader
+                    using (var parquetReader = new ParquetReader(fileStream))
                     {
-                        // create row group reader
-                        using (ParquetRowGroupReader groupReader = parquetReader.OpenRowGroupReader(0))
+                        // get file schema (available straight after opening parquet reader)
+                        // however, get only data fields as only they contain data values
+                        DataField[] dataFields = parquetReader.Schema.GetDataFields();
+
+                        // enumerate through row groups in this file
+                        // for (int i = 0; i < parquetReader.RowGroupCount; i++)
                         {
-                            // read all columns inside each row group (you have an option to read only
-                            // required columns if you need to.
-                            Crowd[] crowds = new Crowd[Math.Min(groupReader.RowCount, maxRowsCount)];
-
-                            DataColumn[] columns = dataFields.Select(groupReader.ReadColumn).ToArray();
-
-                            // .Data member contains a typed array of column data you can cast to the type of the column
-                            DataColumn oidColumn = columns[0];
-                            ulong[] oidColumns = (ulong[])oidColumn.Data;
-
-                            DataColumn mac = columns[2];
-                            string[] macs = (string[])mac.Data;
-
-                            DataColumn addedOnTick = columns[6];
-                            long?[] addedOnTicks = (long?[])addedOnTick.Data;
-
-                            DataColumn oidFrame = columns[7];
-                            string[] oidFrames = (string[])oidFrame.Data;
-
-                            for (int i = 0; i < crowds.Length; i++)
+                            // create row group reader
+                            using (ParquetRowGroupReader groupReader = parquetReader.OpenRowGroupReader(0))
                             {
-                                crowds[i] = new Crowd(oidColumns[i], macs[i], addedOnTicks[i], oidFrames[i] != null ? ulong.Parse(oidFrames[i]) : 0);
+                                // read all columns inside each row group (you have an option to read only
+                                // required columns if you need to.
+                                Crowd[] crowds = new Crowd[Math.Min(groupReader.RowCount, maxRowsCount)];
+
+                                DataColumn[] columns = dataFields.Select(groupReader.ReadColumn).ToArray();
+
+                                // .Data member contains a typed array of column data you can cast to the type of the column
+                                DataColumn oidColumn = columns[0];
+                                ulong[] oidColumns = (ulong[])oidColumn.Data;
+
+                                DataColumn mac = columns[2];
+                                string[] macs = (string[])mac.Data;
+
+                                DataColumn addedOnTick = columns[6];
+                                long?[] addedOnTicks = (long?[])addedOnTick.Data;
+
+                                DataColumn oidFrame = columns[7];
+                                string[] oidFrames = (string[])oidFrame.Data;
+
+                                for (int i = 0; i < crowds.Length; i++)
+                                {
+                                    crowds[i] = new Crowd(oidColumns[i], macs[i], addedOnTicks[i], oidFrames[i] != null ? ulong.Parse(oidFrames[i]) : 0);
+                                }
+                                return crowds;
                             }
-                            return crowds;
                         }
                     }
                 }
             }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
         }
 
-        public static List<PlayerData> GetPlayerData(int playerId, int year, int month)
+        public static List<PlayerData> GetPlayerData(int playerId, DateTime startDate, DateTime endDate)
         {
-            PlayerLog[] playerLogs = ReadParquetPlayerLogFile(playerId, year, month);
+            int year = startDate.Year - 1;
+            int month = startDate.Month;
+            int startDay = startDate.Day;
+            int endDay = endDate.Day;
+
             Crowd[] crowds = ReadParquetCrowdFile(playerId, year, month);
+            PlayerLog[] playerLogs = ReadParquetPlayerLogFile(playerId, year, month);
+
+            if (crowds == null || playerLogs == null)
+                return null;
 
             List<PlayerData> playerData = playerLogs.Join(crowds,
               pl => pl.OidColumn,
@@ -123,7 +145,9 @@ namespace gallery_case_2021
                   crowd.Mac,
                   crowd.AddedOnTick
               )
-            ).ToList();
+            )
+            .Where(x => x.BillingDate.Day >= startDay && x.BillingDate.Day <= endDay)
+            .ToList();
             return playerData;
         }
     }

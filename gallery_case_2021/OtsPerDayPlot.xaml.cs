@@ -13,7 +13,7 @@ namespace gallery_case_2021
             InitializeComponent();
         }
 
-        public void SetData(DateTimeOffset daysMin, int daysInterval, int year, List<int> dayContacts)
+        public void SetData(DateTimeOffset daysMin, int daysInterval, List<int> dayContacts)
         {
             ChartValues<int> values = new ChartValues<int>();
             foreach (int dayContact in dayContacts)
@@ -21,6 +21,7 @@ namespace gallery_case_2021
                 values.Add(dayContact);
             }
 
+            SeriesCollection?.Clear();
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
@@ -31,9 +32,6 @@ namespace gallery_case_2021
                 }
             };
 
-            //also adding values updates and animates the chart automatically
-            // SeriesCollection[1].Values.Add(48d);
-
             Labels = new List<string>();
             for (int i = 0; i < daysInterval; i++)
             {
@@ -41,9 +39,7 @@ namespace gallery_case_2021
                 Labels.Add(date.Day + "." + date.Month + "." + date.Year);
             }
 
-            // Labels = new[] { "Maria", "Susan", "Charles", "Frida" };
             Formatter = value => value.ToString("N");
-
             DataContext = this;
         }
 

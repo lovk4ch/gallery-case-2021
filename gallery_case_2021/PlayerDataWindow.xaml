@@ -10,11 +10,14 @@
         <Label Content="Данные рекламы:" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Width="656" Height="42"/>
         <DataGrid x:Name="playerDataGrid" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Top" FontSize="12" Margin="0,42,0,0"/>
         <Label Content="Всего контактов:" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" FontSize="20" Width="167"/>
-        <Label x:Name="contactsLabel" Content="" HorizontalAlignment="Left" Margin="0,173,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
+        <Label x:Name="contactsLabel" Content="" HorizontalAlignment="Left" Margin="0,170,0,0" VerticalAlignment="Top" FontSize="20" Width="120"/>
         <Label Content="Временной интервал:" HorizontalAlignment="Left" Margin="175,141,0,0" VerticalAlignment="Top" FontSize="20" Width="210"/>
-        <Label x:Name="intervalLabel" Content="" HorizontalAlignment="Left" Margin="175,173,0,0" VerticalAlignment="Top" FontSize="20" Width="196"/>
+        <Label x:Name="intervalLabel" Content="" HorizontalAlignment="Left" Margin="175,170,0,0" VerticalAlignment="Top" FontSize="20" Width="196"/>
         <Label Content="Среднесуточный OTS:" HorizontalAlignment="Left" Margin="395,141,0,0" VerticalAlignment="Top" FontSize="20" Width="210"/>
-        <Label x:Name="averageOTSLabel" Content="" HorizontalAlignment="Left" Margin="395,173,0,0" VerticalAlignment="Top" FontSize="20" Width="196"/>
+        <Label x:Name="averageOTSLabel" Content="" HorizontalAlignment="Left" Margin="395,170,0,0" VerticalAlignment="Top" FontSize="20" Width="196"/>
+        <Label Content="Загруженность:" HorizontalAlignment="Left" Margin="614,141,0,0" VerticalAlignment="Top" FontSize="20" Width="156"/>
+        <Label x:Name="workloadLabel" Content="" HorizontalAlignment="Left" Margin="614,170,0,0" VerticalAlignment="Top" FontSize="20" Width="156" FontWeight="Bold" Foreground="#FF2195F4"/>
         <local:OtsPerDayPlot x:Name="playerPlot" Margin="5,215,10,0"/>
+        <TextBlock x:Name="dataNotFoundLabel" Visibility="Collapsed" Text="Предыдущих данных за указанный период не найдено" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" Margin="0,160,0,0" VerticalAlignment="Center" FontSize="40"/>
     </Grid>
 </UserControl>

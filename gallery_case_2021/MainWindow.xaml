@@ -23,8 +23,8 @@
             </TabItem>
         </TabControl>
         <Label Content="с:" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" FontSize="20" Width="30"/>
-        <DatePicker HorizontalAlignment="Left" FontSize="20" Margin="52,61,0,0" VerticalAlignment="Top" Width="201" IsDropDownOpen="True" FirstDayOfWeek="Monday" DisplayDate="2021-08-22"/>
+        <DatePicker x:Name="dateTimeStart" HorizontalAlignment="Left" FontSize="20" Margin="52,61,0,0" VerticalAlignment="Top" Width="201" FirstDayOfWeek="Monday" DisplayDate="2021-08-22" SelectedDateFormat="Long" DisplayDateEnd="2022-09-01" DisplayDateStart="2021-07-01" SelectedDateChanged="StartDateChanged"/>
         <Label Content="по:" HorizontalAlignment="Left" Margin="10,98,0,0" VerticalAlignment="Top" FontSize="20" Width="44"/>
-        <DatePicker HorizontalAlignment="Left" FontSize="20" Margin="52,101,0,0" VerticalAlignment="Top" Width="201" IsDropDownOpen="True" FirstDayOfWeek="Monday"/>
+        <DatePicker x:Name="dateTimeEnd" HorizontalAlignment="Left" FontSize="20" Margin="52,101,0,0" VerticalAlignment="Top" Width="201" FirstDayOfWeek="Monday" SelectedDateFormat="Long" DisplayDateStart="2021-07-01" DisplayDateEnd="2022-09-01"/>
     </Grid>
 </Window>
