@@ -8,13 +8,14 @@ namespace gallery_case_2021
     {
         public const string ERROR_DATE_EXCESS = "Дата начала задана позже даты окончания рекламной кампании. Выберите другой интервал.";
         public const string ERROR_DATE_NOT_SELECT = "Выберите корректную дату начала и окончания показов";
+        public const string ADV_WAS_PLANNED = "Your ad will be launched soon and everyone will know about your product!";
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void MainClick(object sender, RoutedEventArgs e)
+        private void CheckClick(object sender, RoutedEventArgs e)
         {
             if (dateTimeStart.SelectedDate == null || dateTimeEnd.SelectedDate == null)
             {
@@ -27,8 +28,34 @@ namespace gallery_case_2021
                 return;
             }
 
-            player1_data.SetData(dateTimeStart.SelectedDate, dateTimeEnd.SelectedDate);
-            player2_data.SetData(dateTimeStart.SelectedDate, dateTimeEnd.SelectedDate);
+            float k = 0;
+
+            player1_data.SetData(dateTimeStart.SelectedDate, dateTimeEnd.SelectedDate, out float k1);
+            k += k1;
+            player2_data.SetData(dateTimeStart.SelectedDate, dateTimeEnd.SelectedDate, out float k2);
+            k += k2;
+            k /= 2f;
+
+            idleCoefficient.Content = (1 - k) * 100 + "%";
+
+            int views = (int)Math.Floor(72 * k);
+            viewsPerHourLabel.Content = views;
+
+            userViewsSlider.IsEnabled = true;
+            userViewsSlider.Value = views;
+            
+            MainButton.IsEnabled = true;
+        }
+
+        private void MainClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(ADV_WAS_PLANNED);
+        }
+
+        private void SliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (userViewsLabel != null)
+                userViewsLabel.Content = (int)userViewsSlider.Value;
         }
 
         private void StartDateChanged(object sender, SelectionChangedEventArgs e)

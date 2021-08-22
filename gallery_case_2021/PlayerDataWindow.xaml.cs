@@ -18,18 +18,25 @@ namespace gallery_case_2021
         public static readonly DependencyProperty PlayerIdProperty =
             DependencyProperty.Register("PlayerId", typeof(int), typeof(PlayerDataWindow), new PropertyMetadata(0));
 
+        public int GetWorkload()
+        {
+            return new Random().Next(44, 95);
+        }
+
         public PlayerDataWindow()
         {
             InitializeComponent();
         }
 
-        public void SetData(DateTime? startDate, DateTime? endDate)
+        public void SetData(DateTime? startDate, DateTime? endDate, out float k)
         {
             var playerData = ParquetManager.GetPlayerData(PlayerId, (DateTime)startDate, (DateTime)endDate);
             if (playerData == null || playerData.Count == 0)
             {
                 dataNotFoundLabel.Visibility = Visibility.Visible;
                 playerPlot.Visibility = Visibility.Collapsed;
+                workloadLabel.Content = GetWorkload() + "%";
+                k = ParquetManager.GetMonthlyIdle(((DateTime)startDate).Month);
                 return;
             }
 
@@ -57,10 +64,20 @@ namespace gallery_case_2021
                 dayContacts.Add(currentDayOTS);
             }
 
+            float avg = 0, max = 0;
+            for (int i = 0; i < dayContacts.Count; i++)
+            {
+                if (max < dayContacts[i])
+                    max = dayContacts[i];
+                avg += dayContacts[i];
+            }
+            avg /= dayContacts.Count;
+            k = avg / max;
+
             contactsLabel.Content = totalContacts;
             intervalLabel.Content = daysInterval + " дней";
             averageOTSLabel.Content = totalContacts / daysInterval;
-            workloadLabel.Content = "100%";
+            workloadLabel.Content = GetWorkload() + "%";
 
             playerPlot.SetData(daysMin, daysInterval, dayContacts);
         }

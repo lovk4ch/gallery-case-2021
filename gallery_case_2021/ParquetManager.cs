@@ -122,6 +122,25 @@ namespace gallery_case_2021
             }
         }
 
+        public static float GetMonthlyIdle(int month)
+        {
+            List<float> idles = new List<float>()
+            {
+                0.4f, // January
+                0.5f, // February
+                0.7f, // March
+                0.7f, // April
+                0.6f, // May
+                0.7f, // June
+                0.5f, // July
+                0.6f, // August
+                0.7f, // September
+                0.7f, // October
+                0.7f, // November
+                0.7f  // December
+            };
+            return idles[month - 1];
+        }
         public static List<PlayerData> GetPlayerData(int playerId, DateTime startDate, DateTime endDate)
         {
             int year = startDate.Year - 1;
